@@ -73,6 +73,10 @@ th { background: var(--cell-bg); font-weight: 600; }
 }
 .back-link:hover { color: var(--accent); }
 .subtitle { color: var(--muted); margin-bottom: 2rem; font-size: 1.05rem; }
+
+@media (max-width: 767px) {
+  body { padding: 1rem 0.5rem 3rem; }
+}
 """
 
 # ---------------------------------------------------------------------------
@@ -201,6 +205,19 @@ NOTEBOOK_DARK_CSS = """\
 }
 </style>"""
 
+NOTEBOOK_MOBILE_CSS = """\
+<style>
+/* Prompts are excluded — hide collapser & prompt to reclaim ~72px */
+.jp-Collapser { display: none; }
+.jp-InputPrompt, .jp-OutputPrompt { display: none; }
+/* Code blocks scroll horizontally instead of being clipped */
+.highlight pre { overflow-x: auto; }
+@media (max-width: 767px) {
+  body.jp-Notebook { padding: 0.5rem; }
+  .jp-Cell { padding: 0; }
+}
+</style>"""
+
 MATHJAX = """\
 <script>
 MathJax = {
@@ -253,8 +270,8 @@ def build_notebooks():
         if "mathjax" not in body_raw.lower():
             body_raw = body_raw.replace("</head>", f"{MATHJAX}\n</head>", 1)
 
-        # Inject dark mode CSS
-        body_raw = body_raw.replace("</head>", f"{NOTEBOOK_DARK_CSS}\n</head>", 1)
+        # Inject dark mode and mobile CSS
+        body_raw = body_raw.replace("</head>", f"{NOTEBOOK_DARK_CSS}\n{NOTEBOOK_MOBILE_CSS}\n</head>", 1)
 
         out_path.write_text(body_raw, encoding="utf-8")
         print(f"  {rel.with_suffix('.html')}")
