@@ -205,19 +205,6 @@ NOTEBOOK_DARK_CSS = """\
 }
 </style>"""
 
-NOTEBOOK_MOBILE_CSS = """\
-<style>
-/* Prompts are excluded — hide collapser & prompt to reclaim ~72px */
-.jp-Collapser { display: none; }
-.jp-InputPrompt, .jp-OutputPrompt { display: none; }
-/* Code blocks scroll horizontally instead of being clipped */
-.highlight pre { overflow-x: auto; }
-@media (max-width: 767px) {
-  body.jp-Notebook { padding: 0.5rem; }
-  .jp-Cell { padding: 0; }
-}
-</style>"""
-
 MATHJAX = """\
 <script>
 MathJax = {
@@ -261,17 +248,16 @@ def build_notebooks():
 
         body_raw, _ = exporter.from_filename(str(nb_path))
 
-        # Inject back-link and our styles into the notebook HTML
+        # Inject back-link right after <body...>
         back_link = f'<a class="back-link" href="{back}">&larr; Back to index</a>'
-        # Insert right after <body>
-        body_raw = body_raw.replace("<body>", f"<body>{back_link}", 1)
+        body_raw = re.sub(r'(<body[^>]*>)', rf'\1{back_link}', body_raw, count=1)
 
         # Add MathJax (some notebook templates already include it, but this ensures it)
         if "mathjax" not in body_raw.lower():
             body_raw = body_raw.replace("</head>", f"{MATHJAX}\n</head>", 1)
 
-        # Inject dark mode and mobile CSS
-        body_raw = body_raw.replace("</head>", f"{NOTEBOOK_DARK_CSS}\n{NOTEBOOK_MOBILE_CSS}\n</head>", 1)
+        # Inject dark mode CSS
+        body_raw = body_raw.replace("</head>", f"{NOTEBOOK_DARK_CSS}\n</head>", 1)
 
         out_path.write_text(body_raw, encoding="utf-8")
         print(f"  {rel.with_suffix('.html')}")
