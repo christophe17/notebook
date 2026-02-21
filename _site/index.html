@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Probabilistic Machine Learning</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>:root {
+  --bg: #ffffff; --fg: #1a1a2e; --muted: #64748b;
+  --border: #e2e8f0; --accent: #4f46e5; --accent-hover: #4338ca;
+  --code-bg: #f8fafc; --cell-bg: #f1f5f9;
+  --font: "Inter", system-ui, -apple-system, sans-serif;
+  --mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a; --fg: #e2e8f0; --muted: #94a3b8;
+    --border: #334155; --accent: #818cf8; --accent-hover: #a5b4fc;
+    --code-bg: #1e293b; --cell-bg: #1e293b;
+  }
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 17px; }
+body {
+  font-family: var(--font); color: var(--fg); background: var(--bg);
+  line-height: 1.7; max-width: 960px; margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+}
+h1, h2, h3 { line-height: 1.3; }
+h1 { font-size: 2rem; margin-bottom: .3rem; }
+h2 { font-size: 1.4rem; margin-top: 2.5rem; margin-bottom: 1rem; color: var(--accent); }
+h3 { font-size: 1.15rem; margin-top: 1.5rem; margin-bottom: .5rem; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-hover); text-decoration: underline; }
+hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+p { margin-bottom: 1rem; }
+code {
+  font-family: var(--mono); font-size: .88em;
+  background: var(--code-bg); padding: .15em .35em; border-radius: 4px;
+}
+pre { background: var(--code-bg); padding: 1rem; border-radius: 8px;
+      overflow-x: auto; margin-bottom: 1rem; }
+pre code { background: none; padding: 0; }
+
+/* Tables (README index) */
+table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .92rem; }
+th, td { padding: .6rem .8rem; border: 1px solid var(--border); vertical-align: top; }
+th { background: var(--cell-bg); font-weight: 600; }
+
+/* Notebook output */
+.jp-OutputArea-output img, .output img, .jp-RenderedImage img {
+  max-width: 100%; height: auto;
+}
+.jp-InputArea, .input_area {
+  background: var(--code-bg); border-radius: 8px; margin-bottom: .5rem;
+}
+.jp-OutputArea, .output_area { margin-bottom: 1rem; }
+
+.back-link {
+  display: inline-block; margin-bottom: 1.5rem;
+  font-size: .9rem; color: var(--muted);
+}
+.back-link:hover { color: var(--accent); }
+.subtitle { color: var(--muted); margin-bottom: 2rem; font-size: 1.05rem; }
+</style>
+<script>
+MathJax = {
+  tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body>
+<h1>Probabilistic Machine Learning</h1>
+<p>Interactive notebooks accompanying the <strong>Probabilistic Machine Learning</strong> book.</p>
+<hr />
+<h2>3 - Multivariate Models</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>3.2 - Multivariate Gaussian</strong></td>
+<td><a href="notebooks/3-multivariate-models/3-2-3-mvn_marginals_conditionals.html">Marginals and Conditionals (2D)</a></td>
+<td>Predicting EGFR protein levels from mRNA gene expression</td>
+<td>$p(x_1 \mid x_2)$</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="notebooks/3-multivariate-models/3-2-3-mvn_marginals_conditionals_5d.html">Marginals and Conditionals (5D)</a></td>
+<td>Comprehensive real estate valuation with 5 correlated features</td>
+<td>$p(\mathbf{x}_1 \mid \mathbf{x}_2)$</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="notebooks/3-multivariate-models/3-2-5-mvn_missing_value_imputation.html">Missing Value Imputation</a></td>
+<td>Patient health records with missing lab results</td>
+<td>$p(\mathbf{x}_h \mid \mathbf{x}_v)$</td>
+</tr>
+<tr>
+<td><strong>3.3 - Linear Gaussian System</strong></td>
+<td><a href="notebooks/3-multivariate-models/3-3-1-linear_gaussian_blood_pressure.html">Bayes Rule for Gaussians</a></td>
+<td>Blood pressure estimation with multiple clinical devices</td>
+<td>$p(\mathbf{z} \mid \mathbf{y}) \propto p(\mathbf{y} \mid \mathbf{z})\,p(\mathbf{z})$</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="notebooks/3-multivariate-models/3-3-1-linear_gaussian_derived_health_metrics.html">Bayes Rule with Non-Trivial W</a></td>
+<td>Inferring physiological state from derived health metrics</td>
+<td>$\mathbf{y} = W\mathbf{z} + \boldsymbol{\epsilon}$</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="notebooks/3-multivariate-models/3-3-3-bayesian_temperature_estimation.html">Inferring an Unknown Scalar</a></td>
+<td>Bayesian temperature estimation in industrial monitoring</td>
+<td>$p(\mu \mid \mathbf{y})$</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="notebooks/3-multivariate-models/3-3-4-linear_gaussian_gps_localization.html">Inferring an Unknown Vector</a></td>
+<td>GPS localization of vehicle position from noisy measurements</td>
+<td>$p(\mathbf{z} \mid \mathbf{y})$</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="notebooks/3-multivariate-models/3-3-5-sensor_fusion_autonomous_vehicle.html">Sensor Fusion</a></td>
+<td>Autonomous vehicle localization combining GPS, LiDAR, and camera</td>
+<td>$p(\mathbf{z} \mid \mathbf{y}_1, \mathbf{y}_2, \mathbf{y}_3)$</td>
+</tr>
+<tr>
+<td><strong>3.5 - Mixture Models</strong></td>
+<td><a href="notebooks/3-multivariate-models/3-5-1-gmm_customer_segmentation.html">Gaussian Mixture Models</a></td>
+<td>Customer segmentation for retail analytics using GMM</td>
+<td>$p(\mathbf{x}) = \sum_k \pi_k \mathcal{N}(\mathbf{x} \mid \boldsymbol{\mu}_k, \Sigma_k)$</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>7 - Linear Algebra</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>7.0 - Foundations</strong></td>
+<td><a href="notebooks/7-linear-algebra/7-0-1-scalar_vector_matrix_products.html">Scalar, Vector, and Matrix Products</a></td>
+<td>Basic multiplication shapes and the dimension compatibility rule</td>
+<td>$c = \mathbf{a}^T\mathbf{b},\ \mathbf{c} = A\mathbf{b},\ C = AB$</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="notebooks/7-linear-algebra/7-0-2-inner_product.html">Inner Product (Dot Product)</a></td>
+<td>Measuring alignment and similarity between vectors</td>
+<td>$\mathbf{a}^T\mathbf{b} = \sum_i a_i b_i$</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="notebooks/7-linear-algebra/7-0-3-outer_product.html">Outer Product</a></td>
+<td>Creating matrices from vectors and building covariance</td>
+<td>$\mathbf{a}\mathbf{b}^T$</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="notebooks/7-linear-algebra/7-0-4-matrix_vector_multiplication.html">Matrix-Vector Multiplication</a></td>
+<td>Geometric transformations: rotation, scaling, shearing</td>
+<td>$\mathbf{y} = A\mathbf{x}$</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="notebooks/7-linear-algebra/7-0-5-matrix_matrix_multiplication.html">Matrix-Matrix Multiplication</a></td>
+<td>Composing transformations and the associativity property</td>
+<td>$(AB)C = A(BC)$</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="notebooks/7-linear-algebra/7-0-6-quadratic_forms.html">Quadratic Forms</a></td>
+<td>Weighted distance and Mahalanobis</td>
+<td>$\mathbf{x}^T W \mathbf{x}$</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="notebooks/7-linear-algebra/7-0-7-aba_transpose_pattern.html">The A B A.T Pattern</a></td>
+<td>Transforming covariance through linear maps</td>
+<td>$\Sigma_y = A\Sigma_x A^T$</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="notebooks/7-linear-algebra/7-0-8-schur_complement.html">Schur Complement</a></td>
+<td>Block matrix operations and Gaussian conditioning</td>
+<td>$M/D = A - BD^{-1}C$</td>
+</tr>
+<tr>
+<td><strong>7.3 - Matrix Inversion</strong></td>
+<td><a href="notebooks/7-linear-algebra/7-3-factor_model_covariance_explained.html">Factor Model Covariance</a></td>
+<td>Building gene expression covariance from transcription factor pathways</td>
+<td>$\Sigma = WW^T + \Psi$</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="notebooks/7-linear-algebra/7-3-low_rank_covariance_update_explained.html">Low-Rank Covariance Update</a></td>
+<td>Why adding $XX^T$ to a covariance matrix models new pathway exposures</td>
+<td>$\Sigma' = \Sigma + XX^T$</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="notebooks/7-linear-algebra/7-3-sherman_morrison_single_tf.html">Sherman-Morrison Formula</a></td>
+<td>Rank-1 precision updates when discovering a single transcription factor</td>
+<td>$(A + \mathbf{u}\mathbf{v}^T)^{-1}$</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="notebooks/7-linear-algebra/7-3-matrix_inversion_lemma_grn.html">Matrix Inversion Lemma (Woodbury)</a></td>
+<td>Efficient precision matrix updates for gene regulatory network inference</td>
+<td>$(A + UCV)^{-1}$</td>
+</tr>
+<tr>
+<td><strong>7.4 - Eigenvalue Decomposition</strong></td>
+<td><a href="notebooks/7-linear-algebra/7-4-4-geometry_quadratic_forms.html">Geometry of Quadratic Forms</a></td>
+<td>Ellipsoidal level sets applied to protein binding affinity in drug discovery</td>
+<td>$\mathbf{x}^T A\mathbf{x} = c$</td>
+</tr>
+<tr>
+<td><strong>7.5 - Singular Value Decomposition</strong></td>
+<td><a href="notebooks/7-linear-algebra/7-5-svd_gene_expression.html">SVD</a></td>
+<td>Gene expression profiling: discovering latent biological programs with SVD</td>
+<td>$A = USV^T$</td>
+</tr>
+<tr>
+<td><strong>7.6 - Matrix Decompositions</strong></td>
+<td><a href="notebooks/7-linear-algebra/7-6-3-1-cholesky_mvn_sampling.html">Cholesky Sampling from MVN</a></td>
+<td>Clinical trial simulation with correlated patient biomarkers</td>
+<td>$\Sigma = LL^T$</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>8 - Optimization</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>8.1 - The EM Algorithm</strong></td>
+<td><a href="notebooks/8-optimization/8-1-1-em_algorithm.html">Expectation-Maximization (EM)</a></td>
+<td>Medical diagnosis with latent disease types using Gaussian mixtures</td>
+<td>$\mathcal{Q}(\boldsymbol{\theta}, \boldsymbol{\theta}^{\text{old}})$</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
