@@ -1,16 +1,20 @@
 #!/usr/bin/env python3
-"""Build a static website from README.md and Jupyter notebooks."""
+"""Build a static website from topic summaries and Jupyter notebooks."""
 
-import os
 import re
 import shutil
 from pathlib import Path
 
+import nbformat
 from markdown import markdown
 from nbconvert import HTMLExporter
+from nbconvert.preprocessors import ExecutePreprocessor
 
 SITE_DIR = Path("_site")
 PROJECT_DIR = Path(__file__).parent
+
+# Topic summary files (order determines display order on landing page)
+TOPIC_FILES = ["topics/probabilistic-ml.md", "topics/jax.md"]
 
 # ---------------------------------------------------------------------------
 # Shared CSS
@@ -53,7 +57,7 @@ pre { background: var(--code-bg); padding: 1rem; border-radius: 8px;
       overflow-x: auto; margin-bottom: 1rem; }
 pre code { background: none; padding: 0; }
 
-/* Tables (README index) */
+/* Tables (topic summaries) */
 table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .92rem; }
 th, td { padding: .6rem .8rem; border: 1px solid var(--border); vertical-align: top; }
 th { background: var(--cell-bg); font-weight: 600; }
@@ -64,6 +68,7 @@ th { background: var(--cell-bg); font-weight: 600; }
 }
 .jp-InputArea, .input_area {
   background: var(--code-bg); border-radius: 8px; margin-bottom: .5rem;
+  padding: .75rem 1rem;
 }
 .jp-OutputArea, .output_area { margin-bottom: 1rem; }
 
@@ -74,8 +79,29 @@ th { background: var(--cell-bg); font-weight: 600; }
 .back-link:hover { color: var(--accent); }
 .subtitle { color: var(--muted); margin-bottom: 2rem; font-size: 1.05rem; }
 
+/* Topic cards (landing page) */
+.topic-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.5rem; margin-top: 2rem;
+}
+.topic-card {
+  border: 1px solid var(--border); border-radius: 12px;
+  padding: 2rem; transition: border-color .2s, box-shadow .2s;
+  text-decoration: none; color: var(--fg); display: block;
+}
+.topic-card:hover {
+  border-color: var(--accent); box-shadow: 0 4px 12px rgba(79, 70, 229, .1);
+  text-decoration: none;
+}
+@media (prefers-color-scheme: dark) {
+  .topic-card:hover { box-shadow: 0 4px 12px rgba(129, 140, 248, .15); }
+}
+.topic-card h2 { margin-top: 0; margin-bottom: .5rem; }
+.topic-card p { color: var(--muted); margin: 0; font-size: .95rem; }
+
 @media (max-width: 767px) {
   body { padding: 1rem 0.5rem 3rem; }
+  .topic-grid { grid-template-columns: 1fr; }
 }
 """
 
@@ -100,6 +126,11 @@ def page_html(title: str, body: str, extra_head: str = "") -> str:
 </body>
 </html>"""
 
+
+NOTEBOOK_EXTRA_CSS = """\
+<style>
+.cm-editor.cm-s-jupyter .highlight pre { padding: 10px !important; }
+</style>"""
 
 NOTEBOOK_DARK_CSS = """\
 <style>
@@ -214,27 +245,91 @@ MathJax = {
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>"""
 
+
 # ---------------------------------------------------------------------------
-# Build index.html from README.md
+# Parse topic metadata from markdown files
 # ---------------------------------------------------------------------------
-def build_index():
-    readme = (PROJECT_DIR / "README.md").read_text(encoding="utf-8")
-    # Rewrite .ipynb links to .html
-    readme = re.sub(r'\(notebooks/(.+?)\.ipynb\)', r'(notebooks/\1.html)', readme)
-    body = markdown(readme, extensions=["tables", "fenced_code"])
-    html = page_html("Probabilistic Machine Learning", body, extra_head=MATHJAX)
+def parse_topic(filepath: Path) -> dict:
+    """Extract title, subtitle, and slug from a topic markdown file."""
+    text = filepath.read_text(encoding="utf-8")
+    slug = filepath.stem  # e.g. "probabilistic-ml"
+
+    # Title = first H1
+    m = re.search(r'^#\s+(.+)$', text, re.MULTILINE)
+    title = m.group(1).strip() if m else slug
+
+    # Subtitle = first paragraph after the H1 (non-heading, non-blank, non-rule)
+    lines = text.split('\n')
+    subtitle = ""
+    past_title = False
+    for line in lines:
+        if not past_title:
+            if line.startswith('# '):
+                past_title = True
+            continue
+        stripped = line.strip()
+        if not stripped or stripped.startswith('#') or stripped.startswith('---'):
+            continue
+        # Strip markdown bold/italic for plain text subtitle
+        subtitle = re.sub(r'\*\*(.+?)\*\*', r'\1', stripped)
+        subtitle = re.sub(r'\*(.+?)\*', r'\1', subtitle)
+        break
+
+    return {"slug": slug, "title": title, "subtitle": subtitle, "path": filepath}
+
+
+# ---------------------------------------------------------------------------
+# Build landing page (index.html) with topic cards
+# ---------------------------------------------------------------------------
+def build_landing(topics: list[dict]):
+    cards = []
+    for t in topics:
+        cards.append(
+            f'<a class="topic-card" href="{t["slug"]}.html">'
+            f'<h2>{t["title"]}</h2>'
+            f'<p>{t["subtitle"]}</p>'
+            f'</a>'
+        )
+
+    body = (
+        '<h1>Notebooks</h1>'
+        '<p class="subtitle">Interactive notebooks for learning by doing.</p>'
+        '<div class="topic-grid">'
+        + '\n'.join(cards)
+        + '</div>'
+    )
+    html = page_html("Notebooks", body)
     (SITE_DIR / "index.html").write_text(html, encoding="utf-8")
     print("  index.html")
 
 
 # ---------------------------------------------------------------------------
+# Build topic summary pages
+# ---------------------------------------------------------------------------
+def build_topics(topics: list[dict]):
+    for t in topics:
+        text = t["path"].read_text(encoding="utf-8")
+        # Rewrite .ipynb links to .html
+        text = re.sub(r'\(\.\./notebooks/(.+?)\.ipynb\)', r'(notebooks/\1.html)', text)
+        body = markdown(text, extensions=["tables", "fenced_code"])
+        # Add back-link to landing page
+        back_link = '<a class="back-link" href="index.html">&larr; All topics</a>'
+        body = back_link + body
+        html = page_html(t["title"], body, extra_head=MATHJAX)
+        (SITE_DIR / f'{t["slug"]}.html').write_text(html, encoding="utf-8")
+        print(f'  {t["slug"]}.html')
+
+
+# ---------------------------------------------------------------------------
 # Build notebook HTML files
 # ---------------------------------------------------------------------------
-def build_notebooks():
+def build_notebooks(slug_to_topic: dict[str, dict]):
     exporter = HTMLExporter()
     exporter.template_name = "classic"
     exporter.exclude_input_prompt = True
     exporter.exclude_output_prompt = True
+
+    ep = ExecutePreprocessor(timeout=600, kernel_name="python3")
 
     notebooks = sorted(PROJECT_DIR.glob("notebooks/**/*.ipynb"))
     for nb_path in notebooks:
@@ -242,22 +337,39 @@ def build_notebooks():
         out_path = SITE_DIR / rel.with_suffix(".html")
         out_path.parent.mkdir(parents=True, exist_ok=True)
 
-        # Compute relative path back to index
-        depth = len(rel.parts) - 1  # e.g. notebooks/chapter/file.html → 2 levels up
-        back = "/".join([".."] * depth) + "/index.html"
+        # Topic slug is the first folder under notebooks/
+        # e.g. notebooks/probabilistic-ml/3-multivariate-models/file.ipynb → "probabilistic-ml"
+        topic_slug = rel.parts[1]
+        topic = slug_to_topic.get(topic_slug)
 
-        body_raw, _ = exporter.from_filename(str(nb_path))
+        # Compute relative path back to topic summary
+        depth = len(rel.parts) - 1
+        prefix = "/".join([".."] * depth)
+        if topic:
+            back_href = f'{prefix}/{topic["slug"]}.html'
+            back_text = f'&larr; {topic["title"]}'
+        else:
+            back_href = f'{prefix}/index.html'
+            back_text = '&larr; Back to index'
+
+        # Execute notebook to produce outputs, then convert to HTML
+        nb = nbformat.read(str(nb_path), as_version=4)
+        try:
+            ep.preprocess(nb, {"metadata": {"path": str(nb_path.parent)}})
+        except Exception as e:
+            print(f"  WARNING: execution failed for {rel}: {e}")
+        body_raw, _ = exporter.from_notebook_node(nb)
 
         # Inject back-link right after <body...>
-        back_link = f'<a class="back-link" href="{back}">&larr; Back to index</a>'
+        back_link = f'<a class="back-link" href="{back_href}">{back_text}</a>'
         body_raw = re.sub(r'(<body[^>]*>)', rf'\1{back_link}', body_raw, count=1)
 
         # Add MathJax (some notebook templates already include it, but this ensures it)
         if "mathjax" not in body_raw.lower():
             body_raw = body_raw.replace("</head>", f"{MATHJAX}\n</head>", 1)
 
-        # Inject dark mode CSS
-        body_raw = body_raw.replace("</head>", f"{NOTEBOOK_DARK_CSS}\n</head>", 1)
+        # Inject extra notebook CSS + dark mode CSS
+        body_raw = body_raw.replace("</head>", f"{NOTEBOOK_EXTRA_CSS}\n{NOTEBOOK_DARK_CSS}\n</head>", 1)
 
         out_path.write_text(body_raw, encoding="utf-8")
         print(f"  {rel.with_suffix('.html')}")
@@ -271,11 +383,24 @@ def main():
         shutil.rmtree(SITE_DIR)
     SITE_DIR.mkdir()
 
-    print("Building index...")
-    build_index()
+    # Parse all topic files
+    topics = []
+    for fname in TOPIC_FILES:
+        path = PROJECT_DIR / fname
+        if path.exists():
+            topics.append(parse_topic(path))
+
+    # Build slug → topic mapping
+    slug_to_topic = {t["slug"]: t for t in topics}
+
+    print("Building landing page...")
+    build_landing(topics)
+
+    print("Building topic pages...")
+    build_topics(topics)
 
     print("Building notebooks...")
-    build_notebooks()
+    build_notebooks(slug_to_topic)
 
     print(f"\nDone! Site generated in {SITE_DIR}/")
     print(f"Serve locally with:  python -m http.server -d {SITE_DIR}")

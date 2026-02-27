@@ -2,12 +2,20 @@
 
 ## Project Overview
 
-This is a project containing interactive notebooks that accompany the **Probabilistic Machine Learning** book. Each notebook provides real-world examples illustrating mathematical concepts from specific chapters.
+This is a project containing interactive notebooks organized by **topic**. Each topic has its own summary file and notebook folders.
+
+## Topics
+
+- Topics are defined by markdown files in `topics/` (e.g., `topics/probabilistic-ml.md`, `topics/jax.md`)
+- The `TOPIC_FILES` list in `build.py` controls which files are topics and their display order
+- The landing page (`index.html`) shows one card per topic, linking to its summary page
+- Each topic summary lists its notebooks in chapter tables
+- Notebooks live under `notebooks/<topic-slug>/<chapter>/` (e.g., `notebooks/probabilistic-ml/3-multivariate-models/`)
 
 ## Structure
 
-- **README.md** contains the summary with links to all notebooks
-- Titles are organized on **two levels** (e.g., "3 - Multivariate Models" → "3.2 - Multivariate Gaussian")
+- Each topic summary (`topics/<topic-slug>.md`) contains the full notebook listing
+- Within a topic, titles are organized on **two levels** (e.g., "3 - Multivariate Models" → "3.2 - Multivariate Gaussian")
 - Each chapter has a **single 4-column table** (no headers):
   - **Column 1**: Sub-chapter label in bold (e.g., **3.2 - Multivariate Gaussian**), only on the first row of each group
   - **Column 2**: Mathematical concept name (as a link to the notebook)
