@@ -21,18 +21,11 @@ TOPIC_FILES = ["topics/probabilistic-ml.md", "topics/jax.md"]
 # ---------------------------------------------------------------------------
 CSS = """\
 :root {
-  --bg: #ffffff; --fg: #1a1a2e; --muted: #64748b;
-  --border: #e2e8f0; --accent: #4f46e5; --accent-hover: #4338ca;
-  --code-bg: #f8fafc; --cell-bg: #f1f5f9;
+  --bg: #0f172a; --fg: #e2e8f0; --muted: #94a3b8;
+  --border: #334155; --accent: #818cf8; --accent-hover: #a5b4fc;
+  --code-bg: #1e293b; --cell-bg: #1e293b;
   --font: "Inter", system-ui, -apple-system, sans-serif;
   --mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0f172a; --fg: #e2e8f0; --muted: #94a3b8;
-    --border: #334155; --accent: #818cf8; --accent-hover: #a5b4fc;
-    --code-bg: #1e293b; --cell-bg: #1e293b;
-  }
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 17px; }
@@ -90,11 +83,8 @@ th { background: var(--cell-bg); font-weight: 600; }
   text-decoration: none; color: var(--fg); display: block;
 }
 .topic-card:hover {
-  border-color: var(--accent); box-shadow: 0 4px 12px rgba(79, 70, 229, .1);
+  border-color: var(--accent); box-shadow: 0 4px 12px rgba(129, 140, 248, .15);
   text-decoration: none;
-}
-@media (prefers-color-scheme: dark) {
-  .topic-card:hover { box-shadow: 0 4px 12px rgba(129, 140, 248, .15); }
 }
 .topic-card h2 { margin-top: 0; margin-bottom: .5rem; }
 .topic-card p { color: var(--muted); margin: 0; font-size: .95rem; }
@@ -134,7 +124,6 @@ NOTEBOOK_EXTRA_CSS = """\
 
 NOTEBOOK_DARK_CSS = """\
 <style>
-@media (prefers-color-scheme: dark) {
   :root {
     /* Grey palette — invert for dark */
     --md-grey-50: #212121; --md-grey-100: #303030; --md-grey-200: #424242;
@@ -233,7 +222,6 @@ NOTEBOOK_DARK_CSS = """\
   .dataframe, .rendered_html table { color: #e2e8f0; }
   .dataframe th, .rendered_html th { background: #1e293b !important; }
   .dataframe td, .rendered_html td { background: #0f172a !important; }
-}
 </style>"""
 
 MATHJAX = """\
@@ -329,7 +317,7 @@ def build_notebooks(slug_to_topic: dict[str, dict]):
     exporter.exclude_input_prompt = True
     exporter.exclude_output_prompt = True
 
-    ep = ExecutePreprocessor(timeout=600, kernel_name="python3")
+    ep = ExecutePreprocessor(timeout=600, kernel_name="notebook-venv")
 
     notebooks = sorted(PROJECT_DIR.glob("notebooks/**/*.ipynb"))
     for nb_path in notebooks:
