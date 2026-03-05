@@ -49,6 +49,7 @@ Interactive notebooks accompanying the **Probabilistic Machine Learning** book.
 |---|---|---|---|
 | **8.1 - The EM Algorithm** | [Expectation-Maximization (EM)](../notebooks/probabilistic-ml/8-optimization/8-1-1-em_algorithm.ipynb) | Medical diagnosis with latent disease types using Gaussian mixtures | $\mathcal{Q}(\boldsymbol{\theta}, \boldsymbol{\theta}^{\text{old}})$ |
 | **8.2 - First-Order Methods** | [Gradient Descent](../notebooks/probabilistic-ml/8-optimization/8-2-1-gradient_descent.ipynb) | Drug dose-response curve fitting with gradient descent, line search, and momentum | $\boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_t - \eta_t \nabla \mathcal{L}(\boldsymbol{\theta}_t)$ |
+| **8.3 - Second-Order Methods** | [Newton, BFGS, and Trust Regions](../notebooks/probabilistic-ml/8-optimization/8-3-1-second_order_methods.ipynb) | Enzyme kinetics parameter estimation with Hessian-based optimizers | $\boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_t - \eta_t \mathbf{H}_t^{-1} \nabla \mathcal{L}(\boldsymbol{\theta}_t)$ |
 
 ---
 
@@ -57,3 +58,12 @@ Interactive notebooks accompanying the **Probabilistic Machine Learning** book.
 | | | | |
 |---|---|---|---|
 | **9.2 - Gaussian Discriminant Analysis** | [Gaussian Discriminant Analysis](../notebooks/probabilistic-ml/9-linear-discriminant-analysis/9-2-gaussian_discriminant_analysis.ipynb) | NSCLC cancer subtype classification from blood protein biomarkers | $p(y=c \mid \mathbf{x}) \propto \pi_c \mathcal{N}(\mathbf{x} \mid \boldsymbol{\mu}_c, \boldsymbol{\Sigma}_c)$ |
+| **9.3 - Naive Bayes Classifiers** | [Naive Bayes Classifiers](../notebooks/probabilistic-ml/9-linear-discriminant-analysis/9-3-naive_bayes_classifiers.ipynb) | Antimicrobial compound screening from molecular fingerprints | $p(\mathbf{x} \mid y=c) = \prod_d p(x_d \mid y=c, \theta_{dc})$ |
+
+---
+
+## 10 - Logistic Regression
+
+| | | | |
+|---|---|---|---|
+| **10.2 - Binary Logistic Regression** | [Binary Logistic Regression](../notebooks/probabilistic-ml/10-logistic-regression/10-2-binary_logistic_regression.ipynb) | Predicting tumor drug response from gene expression biomarkers | $p(y \mid \mathbf{x}) = \sigma(\mathbf{w}^\top \mathbf{x} + b)$ |

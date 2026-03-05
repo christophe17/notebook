@@ -287,6 +287,12 @@ MathJax = {
 <td>Drug dose-response curve fitting with gradient descent, line search, and momentum</td>
 <td>$\boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_t - \eta_t \nabla \mathcal{L}(\boldsymbol{\theta}_t)$</td>
 </tr>
+<tr>
+<td><strong>8.3 - Second-Order Methods</strong></td>
+<td><a href="notebooks/probabilistic-ml/8-optimization/8-3-1-second_order_methods.html">Newton, BFGS, and Trust Regions</a></td>
+<td>Enzyme kinetics parameter estimation with Hessian-based optimizers</td>
+<td>$\boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_t - \eta_t \mathbf{H}_t^{-1} \nabla \mathcal{L}(\boldsymbol{\theta}_t)$</td>
+</tr>
 </tbody>
 </table>
 <hr />
@@ -306,6 +312,32 @@ MathJax = {
 <td><a href="notebooks/probabilistic-ml/9-linear-discriminant-analysis/9-2-gaussian_discriminant_analysis.html">Gaussian Discriminant Analysis</a></td>
 <td>NSCLC cancer subtype classification from blood protein biomarkers</td>
 <td>$p(y=c \mid \mathbf{x}) \propto \pi_c \mathcal{N}(\mathbf{x} \mid \boldsymbol{\mu}_c, \boldsymbol{\Sigma}_c)$</td>
+</tr>
+<tr>
+<td><strong>9.3 - Naive Bayes Classifiers</strong></td>
+<td><a href="notebooks/probabilistic-ml/9-linear-discriminant-analysis/9-3-naive_bayes_classifiers.html">Naive Bayes Classifiers</a></td>
+<td>Antimicrobial compound screening from molecular fingerprints</td>
+<td>$p(\mathbf{x} \mid y=c) = \prod_d p(x_d \mid y=c, \theta_{dc})$</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>10 - Logistic Regression</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>10.2 - Binary Logistic Regression</strong></td>
+<td><a href="notebooks/probabilistic-ml/10-logistic-regression/10-2-binary_logistic_regression.html">Binary Logistic Regression</a></td>
+<td>Predicting tumor drug response from gene expression biomarkers</td>
+<td>$p(y \mid \mathbf{x}) = \sigma(\mathbf{w}^\top \mathbf{x} + b)$</td>
 </tr>
 </tbody>
 </table>

@@ -44,3 +44,17 @@ Each notebook should:
 - Include **step-by-step explanations** of formulas from the chapter
 - Provide **visualizations** to build intuition
 - Be self-contained and runnable independently
+
+## Matplotlib
+
+- Use `DejaVu Sans` as the font family — it ships with matplotlib and supports Unicode glyphs (subscripts like θ₁, superscripts like H⁻¹, etc.)
+- Set the font **after** `plt.style.use(...)` calls, since styles override rcParams:
+  ```python
+  plt.style.use('seaborn-v0_8-whitegrid')
+  mpl.rcParams['font.family'] = 'DejaVu Sans'
+  ```
+- When optimizing in log-space with `np.exp(theta)`, clip theta to prevent overflow: `np.exp(np.clip(theta, -20, 20))`
+
+## Memory
+
+- When you discover a useful pattern or fix during a session (e.g., font issues, numerical stability tricks, build quirks), proactively add it to `CLAUDE.md` so it's remembered across sessions
