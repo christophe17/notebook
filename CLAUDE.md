@@ -39,7 +39,7 @@ Example: `3-2-3-mvn_marginals_conditionals.ipynb` for a notebook about Chapter 3
 ## Notebook Guidelines
 
 Each notebook should:
-- Use a **real-world scenario** to illustrate the concept, preferably from the **biotech** field when possible
+- Use a **real-world scenario** to illustrate the concept, preferably from the **biotech** field when possible — ideally related to **whole cell modeling** if the concept is relevant enough, but this is not mandatory
 - Create **fake but realistic data** when needed
 - Include **step-by-step explanations** of formulas from the chapter
 - Provide **visualizations** to build intuition

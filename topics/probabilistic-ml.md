@@ -50,6 +50,7 @@ Interactive notebooks accompanying the **Probabilistic Machine Learning** book.
 | **8.1 - The EM Algorithm** | [Expectation-Maximization (EM)](../notebooks/probabilistic-ml/8-optimization/8-1-1-em_algorithm.ipynb) | Medical diagnosis with latent disease types using Gaussian mixtures | $\mathcal{Q}(\boldsymbol{\theta}, \boldsymbol{\theta}^{\text{old}})$ |
 | **8.2 - First-Order Methods** | [Gradient Descent](../notebooks/probabilistic-ml/8-optimization/8-2-1-gradient_descent.ipynb) | Drug dose-response curve fitting with gradient descent, line search, and momentum | $\boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_t - \eta_t \nabla \mathcal{L}(\boldsymbol{\theta}_t)$ |
 | **8.3 - Second-Order Methods** | [Newton, BFGS, and Trust Regions](../notebooks/probabilistic-ml/8-optimization/8-3-1-second_order_methods.ipynb) | Enzyme kinetics parameter estimation with Hessian-based optimizers | $\boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_t - \eta_t \mathbf{H}_t^{-1} \nabla \mathcal{L}(\boldsymbol{\theta}_t)$ |
+| **8.4 - Stochastic Gradient Descent** | [SGD, Scheduling, and Adam](../notebooks/probabilistic-ml/8-optimization/8-4-1-stochastic_gradient_descent.ipynb) | Predicting drug sensitivity from gene expression with adaptive optimizers | $\boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_t - \eta_t \mathbf{M}_t^{-1} \nabla \mathcal{L}(\boldsymbol{\theta}_t, z_t)$ |
 
 ---
 

@@ -92,6 +92,38 @@ MathJax = {
 <a class="back-link" href="index.html">&larr; All topics</a><h1>JAX</h1>
 <p>Interactive notebooks for learning <strong>JAX</strong> — high-performance numerical computing and machine learning.</p>
 <hr />
+<h2>2 - UvA</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>2.1 - Single-GPU Training</strong></td>
+<td><a href="notebooks/jax/2-uva/2-1-1-single_gpu_techniques.html">Single-GPU Techniques</a></td>
+<td>Protein localization classifier combining mixed precision, gradient checkpointing &amp; accumulation</td>
+<td>$\nabla_\theta \mathcal{L} = \frac{1}{K}\sum_{k=1}^{K} \nabla_\theta \mathcal{L}_k$</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="notebooks/jax/2-uva/2-1-2-single_gpu_transformer.html">Single-GPU Transformer</a></td>
+<td>DNA sequence transformer with mixed precision, remat, gradient accumulation &amp; layer scanning</td>
+<td>$\text{Attention}(Q,K,V) = \text{softmax}_{\text{f32}}!\left(\frac{QK^\top}{\sqrt{d_k}}\right)!V$</td>
+</tr>
+<tr>
+<td><strong>2.2 - Multi-Device Training</strong></td>
+<td><a href="notebooks/jax/2-uva/2-2-1-data_parallel_fsdp.html">Data Parallelism &amp; FSDP</a></td>
+<td>Drug response classifier distributed across devices with shard_map, comparing DP and FSDP strategies</td>
+<td>$\bar{g} = \frac{1}{N}\sum_{i=1}^{N} g_i$</td>
+</tr>
+</tbody>
+</table>
+<hr />
 <h2>7 - Recap Project</h2>
 <table>
 <thead>
