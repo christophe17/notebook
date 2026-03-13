@@ -20,6 +20,16 @@ Interactive notebooks accompanying the **Probabilistic Machine Learning** book.
 
 ---
 
+## 6 - Information Theory
+
+| | | | |
+|---|---|---|---|
+| **6.1 - Entropy** | [Entropy](../notebooks/probabilistic-ml/6-information-theory/6-1-1-entropy.ipynb) | Cell state uncertainty in whole cell modeling: discrete, binary, joint, conditional entropy and perplexity | $H(X) = -\sum_k p_k \log p_k$ |
+| **6.2 - KL Divergence** | [KL Divergence](../notebooks/probabilistic-ml/6-information-theory/6-2-1-kl_divergence.ipynb) | Comparing gene expression distributions across healthy and diseased tissue | $D_{\text{KL}}(p \| q) = \sum_k p_k \log \frac{p_k}{q_k}$ |
+| **6.3 - Mutual Information** | [Mutual Information](../notebooks/probabilistic-ml/6-information-theory/6-3-1-mutual_information.ipynb) | Identifying informative biomarkers for cell state classification | $I(X;Y) = H(X) - H(X \mid Y)$ |
+
+---
+
 ## 7 - Linear Algebra
 
 | | | | |
@@ -68,3 +78,4 @@ Interactive notebooks accompanying the **Probabilistic Machine Learning** book.
 | | | | |
 |---|---|---|---|
 | **10.2 - Binary Logistic Regression** | [Binary Logistic Regression](../notebooks/probabilistic-ml/10-logistic-regression/10-2-binary_logistic_regression.ipynb) | Predicting tumor drug response from gene expression biomarkers | $p(y \mid \mathbf{x}) = \sigma(\mathbf{w}^\top \mathbf{x} + b)$ |
+| **10.3 - Multinomial Logistic Regression** | [Multinomial Logistic Regression](../notebooks/probabilistic-ml/10-logistic-regression/10-3-multinomial_logistic_regression.ipynb) | Classifying NSCLC tumor subtypes from gene expression biomarkers | $p(y=c \mid \mathbf{x}) = \text{softmax}(W\mathbf{x})_c$ |
