@@ -7749,7 +7749,12 @@ Devices: [CpuDevice(id=0)]
 <pre>Master key: [ 0 42]
 Subkey 1:   [  64467757 2916123636]
 Subkey 2:   [2465931498  255383827]
-
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>
 Original:  [1. 2. 3.]
 Modified:  [99.  2.  3.]
 
@@ -8285,13 +8290,13 @@ Grad norm (layer1/w): 994.7156
 
 Higher-order derivatives at x=1.0:
   f(x)   = 0.7614
-  f'(x)  = 0.3366
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>  f''(x) = -1.0788
+<pre>  f'(x)  = 0.3366
+  f''(x) = -1.0788
 </pre>
 </div>
 </div>
@@ -8356,9 +8361,9 @@ Higher-order derivatives at x=1.0:
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>50 steps WITHOUT jit: 0.383s
-50 steps WITH    jit: 0.001s
-Speedup: 432.1×
+<pre>50 steps WITHOUT jit: 0.601s
+50 steps WITH    jit: 0.002s
+Speedup: 311.5×
 </pre>
 </div>
 </div>
@@ -8460,12 +8465,7 @@ Epoch  200 | Train MSE: 0.3496 | Test MSE: 0.3374
 Epoch  250 | Train MSE: 0.3380 | Test MSE: 0.3250
 Epoch  300 | Train MSE: 0.3340 | Test MSE: 0.3217
 Epoch  350 | Train MSE: 0.3325 | Test MSE: 0.3201
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Epoch  400 | Train MSE: 0.3317 | Test MSE: 0.3195
+Epoch  400 | Train MSE: 0.3317 | Test MSE: 0.3195
 Epoch  450 | Train MSE: 0.3313 | Test MSE: 0.3197
 Epoch  499 | Train MSE: 0.3311 | Test MSE: 0.3195
 </pre>
@@ -8698,7 +8698,7 @@ Test  R²:  0.8696
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>200 forward+backward passes: 0.007s (0.03ms each)
+<pre>200 forward+backward passes: 0.005s (0.02ms each)
 Loss: 0.3195
 </pre>
 </div>

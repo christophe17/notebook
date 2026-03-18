@@ -10,8 +10,9 @@ Interactive notebooks for learning **JAX** — high-performance numerical comput
 |---|---|---|---|
 | **2.1 - Single-GPU Training** | [Single-GPU Techniques](../notebooks/jax/2-uva/2-1-1-single_gpu_techniques.ipynb) | Protein localization classifier combining mixed precision, gradient checkpointing & accumulation | $\nabla_\theta \mathcal{L} = \frac{1}{K}\sum_{k=1}^{K} \nabla_\theta \mathcal{L}_k$ |
 | | [Single-GPU Transformer](../notebooks/jax/2-uva/2-1-2-single_gpu_transformer.ipynb) | DNA sequence transformer with mixed precision, remat, gradient accumulation & layer scanning | $\text{Attention}(Q,K,V) = \text{softmax}_{\text{f32}}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right)\!V$ |
-| **2.2 - Multi-Device Training** | [Data Parallelism & FSDP](../notebooks/jax/2-uva/2-2-1-data_parallel_fsdp.ipynb) | Drug response classifier distributed across devices with shard_map, comparing DP and FSDP strategies | $\bar{g} = \frac{1}{N}\sum_{i=1}^{N} g_i$ |
+| **2.2 - Multi-Device Training** | [Single-Device Training](../notebooks/jax/2-uva/2-2-0-single_device_training.ipynb) | Drug response classifier baseline: model, loss, TrainState, jit-compiled step, gradient accumulation | $\theta \leftarrow \theta - \alpha \nabla_\theta \mathcal{L}$ |
 | | [FSDP Step by Step](../notebooks/jax/2-uva/2-2-2-fsdp_step_by_step.ipynb) | Building FSDP from first principles: sharding, all_gather, psum_scatter, and transparent module wrapping | $W = \text{all\_gather}(W_{\text{shard}})$ |
+| | [Pipeline Parallelism Step by Step](../notebooks/jax/2-uva/2-2-3-pipeline_parallel_step_by_step.ipynb) | Splitting a model across devices by layers: micro-batching, ppermute ring communication, stage masking | $\text{bubble} = \frac{S-1}{M+S-1}$ |
 
 ---
 

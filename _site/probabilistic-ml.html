@@ -160,6 +160,38 @@ MathJax = {
 </tbody>
 </table>
 <hr />
+<h2>6 - Information Theory</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>6.1 - Entropy</strong></td>
+<td><a href="notebooks/probabilistic-ml/6-information-theory/6-1-1-entropy.html">Entropy</a></td>
+<td>Cell state uncertainty in whole cell modeling: discrete, binary, joint, conditional entropy and perplexity</td>
+<td>$H(X) = -\sum_k p_k \log p_k$</td>
+</tr>
+<tr>
+<td><strong>6.2 - KL Divergence</strong></td>
+<td><a href="notebooks/probabilistic-ml/6-information-theory/6-2-1-kl_divergence.html">KL Divergence</a></td>
+<td>Comparing gene expression distributions across healthy and diseased tissue</td>
+<td>$D_{\text{KL}}(p | q) = \sum_k p_k \log \frac{p_k}{q_k}$</td>
+</tr>
+<tr>
+<td><strong>6.3 - Mutual Information</strong></td>
+<td><a href="notebooks/probabilistic-ml/6-information-theory/6-3-1-mutual_information.html">Mutual Information</a></td>
+<td>Identifying informative biomarkers for cell state classification</td>
+<td>$I(X;Y) = H(X) - H(X \mid Y)$</td>
+</tr>
+</tbody>
+</table>
+<hr />
 <h2>7 - Linear Algebra</h2>
 <table>
 <thead>
@@ -344,6 +376,12 @@ MathJax = {
 <td><a href="notebooks/probabilistic-ml/10-logistic-regression/10-2-binary_logistic_regression.html">Binary Logistic Regression</a></td>
 <td>Predicting tumor drug response from gene expression biomarkers</td>
 <td>$p(y \mid \mathbf{x}) = \sigma(\mathbf{w}^\top \mathbf{x} + b)$</td>
+</tr>
+<tr>
+<td><strong>10.3 - Multinomial Logistic Regression</strong></td>
+<td><a href="notebooks/probabilistic-ml/10-logistic-regression/10-3-multinomial_logistic_regression.html">Multinomial Logistic Regression</a></td>
+<td>Classifying NSCLC tumor subtypes from gene expression biomarkers</td>
+<td>$p(y=c \mid \mathbf{x}) = \text{softmax}(W\mathbf{x})_c$</td>
 </tr>
 </tbody>
 </table>

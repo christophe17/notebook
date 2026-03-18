@@ -79,3 +79,12 @@ Interactive notebooks accompanying the **Probabilistic Machine Learning** book.
 |---|---|---|---|
 | **10.2 - Binary Logistic Regression** | [Binary Logistic Regression](../notebooks/probabilistic-ml/10-logistic-regression/10-2-binary_logistic_regression.ipynb) | Predicting tumor drug response from gene expression biomarkers | $p(y \mid \mathbf{x}) = \sigma(\mathbf{w}^\top \mathbf{x} + b)$ |
 | **10.3 - Multinomial Logistic Regression** | [Multinomial Logistic Regression](../notebooks/probabilistic-ml/10-logistic-regression/10-3-multinomial_logistic_regression.ipynb) | Classifying NSCLC tumor subtypes from gene expression biomarkers | $p(y=c \mid \mathbf{x}) = \text{softmax}(W\mathbf{x})_c$ |
+
+---
+
+## 11 - Linear Regression
+
+| | | | |
+|---|---|---|---|
+| **11.2 - Least Squares** | [Least Squares Linear Regression](../notebooks/probabilistic-ml/11-linear-regression/11-2-1-least_squares_linear_regression.ipynb) | Predicting protein abundance from mRNA expression in whole cell modeling | $\hat{\mathbf{w}} = (\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top\mathbf{y}$ |
+| **11.3 - Ridge Regression** | [Ridge Regression](../notebooks/probabilistic-ml/11-linear-regression/11-3-1-ridge_regression.ipynb) | Predicting drug sensitivity from high-dimensional gene expression profiles | $\hat{\mathbf{w}} = (\mathbf{X}^\top\mathbf{X} + \lambda\mathbf{I})^{-1}\mathbf{X}^\top\mathbf{y}$ |
