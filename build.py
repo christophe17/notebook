@@ -14,7 +14,7 @@ SITE_DIR = Path("_site")
 PROJECT_DIR = Path(__file__).parent
 
 # Topic summary files (order determines display order on landing page)
-TOPIC_FILES = ["topics/probabilistic-ml.md", "topics/jax.md"]
+TOPIC_FILES = ["topics/probabilistic-ml.md", "topics/jax.md", "topics/advanced-engineering-maths.md"]
 
 # ---------------------------------------------------------------------------
 # Shared CSS

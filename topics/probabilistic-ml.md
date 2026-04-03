@@ -88,3 +88,21 @@ Interactive notebooks accompanying the **Probabilistic Machine Learning** book.
 |---|---|---|---|
 | **11.2 - Least Squares** | [Least Squares Linear Regression](../notebooks/probabilistic-ml/11-linear-regression/11-2-1-least_squares_linear_regression.ipynb) | Predicting protein abundance from mRNA expression in whole cell modeling | $\hat{\mathbf{w}} = (\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top\mathbf{y}$ |
 | **11.3 - Ridge Regression** | [Ridge Regression](../notebooks/probabilistic-ml/11-linear-regression/11-3-1-ridge_regression.ipynb) | Predicting drug sensitivity from high-dimensional gene expression profiles | $\hat{\mathbf{w}} = (\mathbf{X}^\top\mathbf{X} + \lambda\mathbf{I})^{-1}\mathbf{X}^\top\mathbf{y}$ |
+| **11.4 - Lasso Regression** | [Lasso Regression](../notebooks/probabilistic-ml/11-linear-regression/11-4-1-lasso_regression.ipynb) | Identifying antibiotic resistance biomarkers from bacterial gene expression | $\hat{\mathbf{w}} = \arg\min \|\mathbf{X}\mathbf{w}-\mathbf{y}\|^2 + \lambda\|\mathbf{w}\|_1$ |
+| **11.7 - Bayesian Linear Regression** | [Bayesian Linear Regression](../notebooks/probabilistic-ml/11-linear-regression/11-7-1-bayesian_linear_regression.ipynb) | Predicting protein abundance from transcriptomics with full posterior uncertainty | $p(\mathbf{w} \mid \mathcal{D}) = \mathcal{N}(\hat{\mathbf{w}}, \hat{\boldsymbol{\Sigma}})$ |
+
+---
+
+## 13 - Neural Networks for Tabular Data
+
+| | | | |
+|---|---|---|---|
+| **13.1 - Backpropagation** | [Backpropagation for an MLP](../notebooks/probabilistic-ml/13-neural-network-for-tabular-data/13-1-1-backpropagation_mlp.ipynb) | Classifying bacterial antibiotic resistance from genomic features | $\boldsymbol{\delta}_2 = (U^\top \boldsymbol{\delta}_1) \odot H(\mathbf{z})$ |
+
+---
+
+## 16 - Exemplar-based Methods
+
+| | | | |
+|---|---|---|---|
+| **16.2 - Learning Distance Metrics** | [Learning Distance Metrics](../notebooks/probabilistic-ml/16-exemplar-based-methods/16-2-1-learning_distance_metrics.ipynb) | Drug compound similarity from molecular descriptors using LMNN, NCA, and deep metric learning | $d_M(\mathbf{x}, \mathbf{x}') = \sqrt{(\mathbf{x} - \mathbf{x}')^\top M (\mathbf{x} - \mathbf{x}')}$ |

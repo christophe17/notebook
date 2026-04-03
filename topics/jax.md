@@ -4,7 +4,7 @@ Interactive notebooks for learning **JAX** — high-performance numerical comput
 
 ---
 
-## 2 - UvA
+## 2 - UvA Training Models At Scale
 
 | | | | |
 |---|---|---|---|
@@ -13,6 +13,14 @@ Interactive notebooks for learning **JAX** — high-performance numerical comput
 | **2.2 - Multi-Device Training** | [Single-Device Training](../notebooks/jax/2-uva/2-2-0-single_device_training.ipynb) | Drug response classifier baseline: model, loss, TrainState, jit-compiled step, gradient accumulation | $\theta \leftarrow \theta - \alpha \nabla_\theta \mathcal{L}$ |
 | | [FSDP Step by Step](../notebooks/jax/2-uva/2-2-2-fsdp_step_by_step.ipynb) | Building FSDP from first principles: sharding, all_gather, psum_scatter, and transparent module wrapping | $W = \text{all\_gather}(W_{\text{shard}})$ |
 | | [Pipeline Parallelism Step by Step](../notebooks/jax/2-uva/2-2-3-pipeline_parallel_step_by_step.ipynb) | Splitting a model across devices by layers: micro-batching, ppermute ring communication, stage masking | $\text{bubble} = \frac{S-1}{M+S-1}$ |
+
+---
+
+## 3 - UvA Deep Learning 1
+
+| | | | |
+|---|---|---|---|
+| **3.3 - Activation Functions** | [Activation Functions](../notebooks/jax/3-uva-dl1/3-3-1-activation_functions.ipynb) | Comparing six activation functions on FashionMNIST: gradient flow, dead neurons, and training stability | $\text{Swish}(x) = x \cdot \sigma(x)$ |
 
 ---
 
