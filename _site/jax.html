@@ -92,7 +92,7 @@ MathJax = {
 <a class="back-link" href="index.html">&larr; All topics</a><h1>JAX</h1>
 <p>Interactive notebooks for learning <strong>JAX</strong> — high-performance numerical computing and machine learning.</p>
 <hr />
-<h2>2 - UvA</h2>
+<h2>2 - UvA Training Models At Scale</h2>
 <table>
 <thead>
 <tr>
@@ -117,15 +117,41 @@ MathJax = {
 </tr>
 <tr>
 <td><strong>2.2 - Multi-Device Training</strong></td>
-<td><a href="notebooks/jax/2-uva/2-2-1-data_parallel_fsdp.html">Data Parallelism &amp; FSDP</a></td>
-<td>Drug response classifier distributed across devices with shard_map, comparing DP and FSDP strategies</td>
-<td>$\bar{g} = \frac{1}{N}\sum_{i=1}^{N} g_i$</td>
+<td><a href="notebooks/jax/2-uva/2-2-0-single_device_training.html">Single-Device Training</a></td>
+<td>Drug response classifier baseline: model, loss, TrainState, jit-compiled step, gradient accumulation</td>
+<td>$\theta \leftarrow \theta - \alpha \nabla_\theta \mathcal{L}$</td>
 </tr>
 <tr>
 <td></td>
 <td><a href="notebooks/jax/2-uva/2-2-2-fsdp_step_by_step.html">FSDP Step by Step</a></td>
 <td>Building FSDP from first principles: sharding, all_gather, psum_scatter, and transparent module wrapping</td>
 <td>$W = \text{all_gather}(W_{\text{shard}})$</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="notebooks/jax/2-uva/2-2-3-pipeline_parallel_step_by_step.html">Pipeline Parallelism Step by Step</a></td>
+<td>Splitting a model across devices by layers: micro-batching, ppermute ring communication, stage masking</td>
+<td>$\text{bubble} = \frac{S-1}{M+S-1}$</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>3 - UvA Deep Learning 1</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>3.3 - Activation Functions</strong></td>
+<td><a href="notebooks/jax/3-uva-dl1/3-3-1-activation_functions.html">Activation Functions</a></td>
+<td>Comparing six activation functions on FashionMNIST: gradient flow, dead neurons, and training stability</td>
+<td>$\text{Swish}(x) = x \cdot \sigma(x)$</td>
 </tr>
 </tbody>
 </table>

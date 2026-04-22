@@ -385,5 +385,127 @@ MathJax = {
 </tr>
 </tbody>
 </table>
+<hr />
+<h2>11 - Linear Regression</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>11.2 - Least Squares</strong></td>
+<td><a href="notebooks/probabilistic-ml/11-linear-regression/11-2-1-least_squares_linear_regression.html">Least Squares Linear Regression</a></td>
+<td>Predicting protein abundance from mRNA expression in whole cell modeling</td>
+<td>$\hat{\mathbf{w}} = (\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top\mathbf{y}$</td>
+</tr>
+<tr>
+<td><strong>11.3 - Ridge Regression</strong></td>
+<td><a href="notebooks/probabilistic-ml/11-linear-regression/11-3-1-ridge_regression.html">Ridge Regression</a></td>
+<td>Predicting drug sensitivity from high-dimensional gene expression profiles</td>
+<td>$\hat{\mathbf{w}} = (\mathbf{X}^\top\mathbf{X} + \lambda\mathbf{I})^{-1}\mathbf{X}^\top\mathbf{y}$</td>
+</tr>
+<tr>
+<td><strong>11.4 - Lasso Regression</strong></td>
+<td><a href="notebooks/probabilistic-ml/11-linear-regression/11-4-1-lasso_regression.html">Lasso Regression</a></td>
+<td>Identifying antibiotic resistance biomarkers from bacterial gene expression</td>
+<td>$\hat{\mathbf{w}} = \arg\min |\mathbf{X}\mathbf{w}-\mathbf{y}|^2 + \lambda|\mathbf{w}|_1$</td>
+</tr>
+<tr>
+<td><strong>11.7 - Bayesian Linear Regression</strong></td>
+<td><a href="notebooks/probabilistic-ml/11-linear-regression/11-7-1-bayesian_linear_regression.html">Bayesian Linear Regression</a></td>
+<td>Predicting protein abundance from transcriptomics with full posterior uncertainty</td>
+<td>$p(\mathbf{w} \mid \mathcal{D}) = \mathcal{N}(\hat{\mathbf{w}}, \hat{\boldsymbol{\Sigma}})$</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>13 - Neural Networks for Tabular Data</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>13.1 - Backpropagation</strong></td>
+<td><a href="notebooks/probabilistic-ml/13-neural-network-for-tabular-data/13-1-1-backpropagation_mlp.html">Backpropagation for an MLP</a></td>
+<td>Classifying bacterial antibiotic resistance from genomic features</td>
+<td>$\boldsymbol{\delta}_2 = (U^\top \boldsymbol{\delta}_1) \odot H(\mathbf{z})$</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>16 - Exemplar-based Methods</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>16.2 - Learning Distance Metrics</strong></td>
+<td><a href="notebooks/probabilistic-ml/16-exemplar-based-methods/16-2-1-learning_distance_metrics.html">Learning Distance Metrics</a></td>
+<td>Drug compound similarity from molecular descriptors using LMNN, NCA, and deep metric learning</td>
+<td>$d_M(\mathbf{x}, \mathbf{x}') = \sqrt{(\mathbf{x} - \mathbf{x}')^\top M (\mathbf{x} - \mathbf{x}')}$</td>
+</tr>
+<tr>
+<td><strong>16.3 - Kernel Density Estimation</strong></td>
+<td><a href="notebooks/probabilistic-ml/16-exemplar-based-methods/16-3-1-kernel_density_estimation.html">Kernel Density Estimation</a></td>
+<td>Non-parametric profiling of single-cell flow cytometry, T-cell classification, and dose-response regression</td>
+<td>$p(x \mid \mathcal{D}) = \frac{1}{N}\sum_n K_h(x - x_n)$</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>17 - Kernel Methods</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>17.1 - Mercer Kernels</strong></td>
+<td><a href="notebooks/probabilistic-ml/17-kernel-methods/17-1-1-mercer_kernels.html">Mercer Kernels</a></td>
+<td>Cell phenotype similarity from gene expression using RBF, Matern, ARD, and kernel combination</td>
+<td>$\kappa(\mathbf{x}, \mathbf{x}') = \exp!\left(-\frac{|\mathbf{x} - \mathbf{x}'|^2}{2\ell^2}\right)$</td>
+</tr>
+<tr>
+<td><strong>17.2 - Gaussian Processes</strong></td>
+<td><a href="notebooks/probabilistic-ml/17-kernel-methods/17-2-1-gaussian_processes.html">Gaussian Processes</a></td>
+<td>Predicting enzyme activity across temperature conditions with GP prior, posterior, and marginal likelihood</td>
+<td>$p(\mathbf{f}<em><em> \mid \mathcal{D}) = \mathcal{N}(\boldsymbol{\mu}_</em>, \mathbf{K}</em>{<em>,</em>} - \mathbf{K}_{X,<em>}^\top \mathbf{K}<em>\sigma^{-1} \mathbf{K}</em>{X,</em>})$</td>
+</tr>
+<tr>
+<td><strong>17.3 - Support Vector Machines</strong></td>
+<td><a href="notebooks/probabilistic-ml/17-kernel-methods/17-3-1-support_vector_machines.html">Support Vector Machines</a></td>
+<td>Classifying bacterial cells as stressed vs. normal with hard/soft margin, kernel trick, and SVR</td>
+<td>$f(\mathbf{x}) = \sum_{n \in \mathcal{S}} \alpha_n \tilde{y}_n \kappa(\mathbf{x}_n, \mathbf{x}) + \hat{w}_0$</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="notebooks/probabilistic-ml/17-kernel-methods/17-3-9-kernel_ridge_regression.html">Kernel Ridge Regression</a></td>
+<td>Predicting enzyme activity from substrate concentration using the kernel trick</td>
+<td>$f(\mathbf{x}) = \mathbf{k}^\top(\mathbf{K} + \lambda \mathbf{I})^{-1}\mathbf{y}$</td>
+</tr>
+</tbody>
+</table>
 </body>
 </html>

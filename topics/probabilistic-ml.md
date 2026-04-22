@@ -106,3 +106,15 @@ Interactive notebooks accompanying the **Probabilistic Machine Learning** book.
 | | | | |
 |---|---|---|---|
 | **16.2 - Learning Distance Metrics** | [Learning Distance Metrics](../notebooks/probabilistic-ml/16-exemplar-based-methods/16-2-1-learning_distance_metrics.ipynb) | Drug compound similarity from molecular descriptors using LMNN, NCA, and deep metric learning | $d_M(\mathbf{x}, \mathbf{x}') = \sqrt{(\mathbf{x} - \mathbf{x}')^\top M (\mathbf{x} - \mathbf{x}')}$ |
+| **16.3 - Kernel Density Estimation** | [Kernel Density Estimation](../notebooks/probabilistic-ml/16-exemplar-based-methods/16-3-1-kernel_density_estimation.ipynb) | Non-parametric profiling of single-cell flow cytometry, T-cell classification, and dose-response regression | $p(x \mid \mathcal{D}) = \frac{1}{N}\sum_n K_h(x - x_n)$ |
+
+---
+
+## 17 - Kernel Methods
+
+| | | | |
+|---|---|---|---|
+| **17.1 - Mercer Kernels** | [Mercer Kernels](../notebooks/probabilistic-ml/17-kernel-methods/17-1-1-mercer_kernels.ipynb) | Cell phenotype similarity from gene expression using RBF, Matern, ARD, and kernel combination | $\kappa(\mathbf{x}, \mathbf{x}') = \exp\!\left(-\frac{\|\mathbf{x} - \mathbf{x}'\|^2}{2\ell^2}\right)$ |
+| **17.2 - Gaussian Processes** | [Gaussian Processes](../notebooks/probabilistic-ml/17-kernel-methods/17-2-1-gaussian_processes.ipynb) | Predicting enzyme activity across temperature conditions with GP prior, posterior, and marginal likelihood | $p(\mathbf{f}_* \mid \mathcal{D}) = \mathcal{N}(\boldsymbol{\mu}_*, \mathbf{K}_{*,*} - \mathbf{K}_{X,*}^\top \mathbf{K}_\sigma^{-1} \mathbf{K}_{X,*})$ |
+| **17.3 - Support Vector Machines** | [Support Vector Machines](../notebooks/probabilistic-ml/17-kernel-methods/17-3-1-support_vector_machines.ipynb) | Classifying bacterial cells as stressed vs. normal with hard/soft margin, kernel trick, and SVR | $f(\mathbf{x}) = \sum_{n \in \mathcal{S}} \alpha_n \tilde{y}_n \kappa(\mathbf{x}_n, \mathbf{x}) + \hat{w}_0$ |
+| | [Kernel Ridge Regression](../notebooks/probabilistic-ml/17-kernel-methods/17-3-9-kernel_ridge_regression.ipynb) | Predicting enzyme activity from substrate concentration using the kernel trick | $f(\mathbf{x}) = \mathbf{k}^\top(\mathbf{K} + \lambda \mathbf{I})^{-1}\mathbf{y}$ |

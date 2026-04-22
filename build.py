@@ -16,6 +16,9 @@ PROJECT_DIR = Path(__file__).parent
 # Topic summary files (order determines display order on landing page)
 TOPIC_FILES = ["topics/probabilistic-ml.md", "topics/jax.md", "topics/advanced-engineering-maths.md"]
 
+# Notebook folders to skip during build (folder names under notebooks/)
+SKIP_FOLDERS = {"jax"}
+
 # ---------------------------------------------------------------------------
 # Shared CSS
 # ---------------------------------------------------------------------------
@@ -321,6 +324,9 @@ def build_notebooks(slug_to_topic: dict[str, dict]):
 
     notebooks = sorted(PROJECT_DIR.glob("notebooks/**/*.ipynb"))
     for nb_path in notebooks:
+        # Skip notebooks in excluded folders
+        if any(part in SKIP_FOLDERS for part in nb_path.relative_to(PROJECT_DIR).parts):
+            continue
         rel = nb_path.relative_to(PROJECT_DIR)
         out_path = SITE_DIR / rel.with_suffix(".html")
         out_path.parent.mkdir(parents=True, exist_ok=True)
