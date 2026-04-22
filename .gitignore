@@ -2,9 +2,6 @@ __pycache__/
 venv/
 .DS_Store
 
-# Build output
-_site/
-
 # Course PDFs
 courses/
 
