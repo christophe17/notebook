@@ -1,1 +1,0 @@
-{"num_classes": 10, "hidden_sizes": [512, 256, 256, 128], "act_fn": {"name": "leakyrelu", "alpha": 0.1}}

@@ -2,4 +2,14 @@ __pycache__/
 venv/
 .DS_Store
 
-# /courses/
+# Build output
+_site/
+
+# Course PDFs
+courses/
+
+# Datasets
+notebooks/data/
+
+# Saved models
+notebooks/saved_models/
