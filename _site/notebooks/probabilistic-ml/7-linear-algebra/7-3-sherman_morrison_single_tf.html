@@ -8182,9 +8182,9 @@ Handles both symmetric (u @ u^T) and general (u @ v^T) rank-1 updates.
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>Single TF Update (FOXM1 Discovery):
 ==================================================
-Direct inversion:    3.45 ms  (O(N³))
-Sherman-Morrison:    0.95 ms  (O(N²))
-Speedup:             3.6x
+Direct inversion:    3.72 ms  (O(N³))
+Sherman-Morrison:    0.92 ms  (O(N²))
+Speedup:             4.0x
 
 Max difference:      1.75e-12 (numerically identical)
 </pre>
@@ -8420,9 +8420,9 @@ As expected, the largest changes are among proliferation genes (FOXM1 targets).
 
 Method                               Time
 ---------------------------------------------
-5x Sherman-Morrison                6.71 ms
-Direct inversion (final)           4.27 ms
-Speedup                             0.6x
+5x Sherman-Morrison                3.83 ms
+Direct inversion (final)           3.22 ms
+Speedup                             0.8x
 
 Max difference: 9.77e-13 (numerically identical)
 </pre>

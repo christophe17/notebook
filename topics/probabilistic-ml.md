@@ -118,3 +118,11 @@ Interactive notebooks accompanying the **Probabilistic Machine Learning** book.
 | **17.2 - Gaussian Processes** | [Gaussian Processes](../notebooks/probabilistic-ml/17-kernel-methods/17-2-1-gaussian_processes.ipynb) | Predicting enzyme activity across temperature conditions with GP prior, posterior, and marginal likelihood | $p(\mathbf{f}_* \mid \mathcal{D}) = \mathcal{N}(\boldsymbol{\mu}_*, \mathbf{K}_{*,*} - \mathbf{K}_{X,*}^\top \mathbf{K}_\sigma^{-1} \mathbf{K}_{X,*})$ |
 | **17.3 - Support Vector Machines** | [Support Vector Machines](../notebooks/probabilistic-ml/17-kernel-methods/17-3-1-support_vector_machines.ipynb) | Classifying bacterial cells as stressed vs. normal with hard/soft margin, kernel trick, and SVR | $f(\mathbf{x}) = \sum_{n \in \mathcal{S}} \alpha_n \tilde{y}_n \kappa(\mathbf{x}_n, \mathbf{x}) + \hat{w}_0$ |
 | | [Kernel Ridge Regression](../notebooks/probabilistic-ml/17-kernel-methods/17-3-9-kernel_ridge_regression.ipynb) | Predicting enzyme activity from substrate concentration using the kernel trick | $f(\mathbf{x}) = \mathbf{k}^\top(\mathbf{K} + \lambda \mathbf{I})^{-1}\mathbf{y}$ |
+
+---
+
+## 18 - Trees, Forests, Bagging, and Boosting
+
+| | | | |
+|---|---|---|---|
+| **18.1 - Tree Ensembles for Biotech** | [Random Forests and Gradient Boosting](../notebooks/probabilistic-ml/18-tree-forest-bagging-boosting/18-1-1-tree_ensembles_biotech.ipynb) | Predicting cancer cell line drug sensitivity from multi-omics (expression + mutations + tissue) with a practical tour of RF, XGBoost-style gradient boosting, feature importance, and partial dependence | $f_m(\mathbf{x}) = f_{m-1}(\mathbf{x}) + \nu F_m(\mathbf{x}; \boldsymbol{\theta}_m)$ |

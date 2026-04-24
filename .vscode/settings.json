@@ -7,5 +7,6 @@
         "**/Thumbs.db": true,
         "**/__pycache__": true
     },
+    "claudeCode.respectGitIgnore": false,
     "hide-files.files": []
 }
