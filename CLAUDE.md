@@ -2,20 +2,24 @@
 
 ## Project Overview
 
-This is a project containing interactive notebooks organized by **topic**. Each topic has its own summary file and notebook folders.
+This is a project containing interactive notebooks organized by **book**. Each book has its own summary file and notebook folders.
 
-## Topics
+## Books
 
-- Topics are defined by markdown files in `topics/` (e.g., `topics/probabilistic-ml.md`, `topics/jax.md`)
-- The `TOPIC_FILES` list in `build.py` controls which files are topics and their display order
-- The landing page (`index.html`) shows one card per topic, linking to its summary page
-- Each topic summary lists its notebooks in chapter tables
-- Notebooks live under `notebooks/<topic-slug>/<chapter>/` (e.g., `notebooks/probabilistic-ml/3-multivariate-models/`)
+Three top-level folders, one per concern:
+- `summaries/<book-slug>.md` — TOC markdown files listing each book's notebooks (e.g., `summaries/pml-1.md`)
+- `notebooks/<book-slug>/<chapter>/` — the interactive `.ipynb` files (e.g., `notebooks/pml-1/3-multivariate-models/`)
+- `books/<book-slug>/` — book source PDFs (gitignored)
+
+Other notes:
+- The `BOOK_FILES` list in `build.py` controls which summaries are books and their display order
+- The landing page (`index.html`) shows one card per book, linking to its summary page
+- Inside a summary file, notebook links use `../notebooks/<book-slug>/...ipynb` (relative from `summaries/` to a sibling notebook); `build.py` rewrites them to site-root `.html` paths
 
 ## Structure
 
-- Each topic summary (`topics/<topic-slug>.md`) contains the full notebook listing
-- Within a topic, titles are organized on **two levels** (e.g., "3 - Multivariate Models" → "3.2 - Multivariate Gaussian")
+- Each book TOC (`summaries/<book-slug>.md`) contains the full notebook listing
+- Within a book, titles are organized on **two levels** (e.g., "3 - Multivariate Models" → "3.2 - Multivariate Gaussian")
 - Each chapter has a **single 4-column table** (no headers):
   - **Column 1**: Sub-chapter label in bold (e.g., **3.2 - Multivariate Gaussian**), only on the first row of each group
   - **Column 2**: Mathematical concept name (as a link to the notebook)

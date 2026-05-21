@@ -2,8 +2,8 @@ __pycache__/
 venv/
 .DS_Store
 
-# Course PDFs
-courses/
+# Book source PDFs (markdown summaries at books/*.md are tracked)
+books/*/
 
 # Datasets
 notebooks/data/

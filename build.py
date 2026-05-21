@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a static website from topic summaries and Jupyter notebooks."""
+"""Build a static website from book summaries and Jupyter notebooks."""
 
 import re
 import shutil
@@ -13,8 +13,8 @@ from nbconvert.preprocessors import ExecutePreprocessor
 SITE_DIR = Path("_site")
 PROJECT_DIR = Path(__file__).parent
 
-# Topic summary files (order determines display order on landing page)
-TOPIC_FILES = ["topics/probabilistic-ml.md", "topics/jax.md", "topics/advanced-engineering-maths.md"]
+# Book summary files (order determines display order on landing page)
+BOOK_FILES = ["summaries/pml-1.md", "summaries/pml-2.md", "summaries/jax.md", "summaries/aem.md"]
 
 # Notebook folders to skip during build (folder names under notebooks/)
 SKIP_FOLDERS = {"jax"}
@@ -53,7 +53,7 @@ pre { background: var(--code-bg); padding: 1rem; border-radius: 8px;
       overflow-x: auto; margin-bottom: 1rem; }
 pre code { background: none; padding: 0; }
 
-/* Tables (topic summaries) */
+/* Tables (book summaries) */
 table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .92rem; }
 th, td { padding: .6rem .8rem; border: 1px solid var(--border); vertical-align: top; }
 th { background: var(--cell-bg); font-weight: 600; }
@@ -75,26 +75,26 @@ th { background: var(--cell-bg); font-weight: 600; }
 .back-link:hover { color: var(--accent); }
 .subtitle { color: var(--muted); margin-bottom: 2rem; font-size: 1.05rem; }
 
-/* Topic cards (landing page) */
-.topic-grid {
+/* Book cards (landing page) */
+.book-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 1.5rem; margin-top: 2rem;
 }
-.topic-card {
+.book-card {
   border: 1px solid var(--border); border-radius: 12px;
   padding: 2rem; transition: border-color .2s, box-shadow .2s;
   text-decoration: none; color: var(--fg); display: block;
 }
-.topic-card:hover {
+.book-card:hover {
   border-color: var(--accent); box-shadow: 0 4px 12px rgba(129, 140, 248, .15);
   text-decoration: none;
 }
-.topic-card h2 { margin-top: 0; margin-bottom: .5rem; }
-.topic-card p { color: var(--muted); margin: 0; font-size: .95rem; }
+.book-card h2 { margin-top: 0; margin-bottom: .5rem; }
+.book-card p { color: var(--muted); margin: 0; font-size: .95rem; }
 
 @media (max-width: 767px) {
   body { padding: 1rem 0.5rem 3rem; }
-  .topic-grid { grid-template-columns: 1fr; }
+  .book-grid { grid-template-columns: 1fr; }
 }
 """
 
@@ -238,12 +238,12 @@ MathJax = {
 
 
 # ---------------------------------------------------------------------------
-# Parse topic metadata from markdown files
+# Parse book metadata from markdown files
 # ---------------------------------------------------------------------------
-def parse_topic(filepath: Path) -> dict:
-    """Extract title, subtitle, and slug from a topic markdown file."""
+def parse_book(filepath: Path) -> dict:
+    """Extract title, subtitle, and slug from a book markdown file."""
     text = filepath.read_text(encoding="utf-8")
-    slug = filepath.stem  # e.g. "probabilistic-ml"
+    slug = filepath.stem  # e.g. "pml-1"
 
     # Title = first H1
     m = re.search(r'^#\s+(.+)$', text, re.MULTILINE)
@@ -270,22 +270,22 @@ def parse_topic(filepath: Path) -> dict:
 
 
 # ---------------------------------------------------------------------------
-# Build landing page (index.html) with topic cards
+# Build landing page (index.html) with book cards
 # ---------------------------------------------------------------------------
-def build_landing(topics: list[dict]):
+def build_landing(books: list[dict]):
     cards = []
-    for t in topics:
+    for b in books:
         cards.append(
-            f'<a class="topic-card" href="{t["slug"]}.html">'
-            f'<h2>{t["title"]}</h2>'
-            f'<p>{t["subtitle"]}</p>'
+            f'<a class="book-card" href="{b["slug"]}.html">'
+            f'<h2>{b["title"]}</h2>'
+            f'<p>{b["subtitle"]}</p>'
             f'</a>'
         )
 
     body = (
         '<h1>Notebooks</h1>'
         '<p class="subtitle">Interactive notebooks for learning by doing.</p>'
-        '<div class="topic-grid">'
+        '<div class="book-grid">'
         + '\n'.join(cards)
         + '</div>'
     )
@@ -295,26 +295,26 @@ def build_landing(topics: list[dict]):
 
 
 # ---------------------------------------------------------------------------
-# Build topic summary pages
+# Build book summary pages
 # ---------------------------------------------------------------------------
-def build_topics(topics: list[dict]):
-    for t in topics:
-        text = t["path"].read_text(encoding="utf-8")
+def build_books(books: list[dict]):
+    for b in books:
+        text = b["path"].read_text(encoding="utf-8")
         # Rewrite .ipynb links to .html
         text = re.sub(r'\(\.\./notebooks/(.+?)\.ipynb\)', r'(notebooks/\1.html)', text)
         body = markdown(text, extensions=["tables", "fenced_code"])
         # Add back-link to landing page
-        back_link = '<a class="back-link" href="index.html">&larr; All topics</a>'
+        back_link = '<a class="back-link" href="index.html">&larr; All books</a>'
         body = back_link + body
-        html = page_html(t["title"], body, extra_head=MATHJAX)
-        (SITE_DIR / f'{t["slug"]}.html').write_text(html, encoding="utf-8")
-        print(f'  {t["slug"]}.html')
+        html = page_html(b["title"], body, extra_head=MATHJAX)
+        (SITE_DIR / f'{b["slug"]}.html').write_text(html, encoding="utf-8")
+        print(f'  {b["slug"]}.html')
 
 
 # ---------------------------------------------------------------------------
 # Build notebook HTML files
 # ---------------------------------------------------------------------------
-def build_notebooks(slug_to_topic: dict[str, dict]):
+def build_notebooks(slug_to_book: dict[str, dict]):
     exporter = HTMLExporter()
     exporter.template_name = "classic"
     exporter.exclude_input_prompt = True
@@ -331,17 +331,17 @@ def build_notebooks(slug_to_topic: dict[str, dict]):
         out_path = SITE_DIR / rel.with_suffix(".html")
         out_path.parent.mkdir(parents=True, exist_ok=True)
 
-        # Topic slug is the first folder under notebooks/
-        # e.g. notebooks/probabilistic-ml/3-multivariate-models/file.ipynb → "probabilistic-ml"
-        topic_slug = rel.parts[1]
-        topic = slug_to_topic.get(topic_slug)
+        # Book slug is the first folder under notebooks/
+        # e.g. notebooks/pml-1/3-multivariate-models/file.ipynb → "pml-1"
+        book_slug = rel.parts[1]
+        book = slug_to_book.get(book_slug)
 
-        # Compute relative path back to topic summary
+        # Compute relative path back to book summary
         depth = len(rel.parts) - 1
         prefix = "/".join([".."] * depth)
-        if topic:
-            back_href = f'{prefix}/{topic["slug"]}.html'
-            back_text = f'&larr; {topic["title"]}'
+        if book:
+            back_href = f'{prefix}/{book["slug"]}.html'
+            back_text = f'&larr; {book["title"]}'
         else:
             back_href = f'{prefix}/index.html'
             back_text = '&larr; Back to index'
@@ -377,24 +377,24 @@ def main():
         shutil.rmtree(SITE_DIR)
     SITE_DIR.mkdir()
 
-    # Parse all topic files
-    topics = []
-    for fname in TOPIC_FILES:
+    # Parse all book files
+    books = []
+    for fname in BOOK_FILES:
         path = PROJECT_DIR / fname
         if path.exists():
-            topics.append(parse_topic(path))
+            books.append(parse_book(path))
 
-    # Build slug → topic mapping
-    slug_to_topic = {t["slug"]: t for t in topics}
+    # Build slug → book mapping
+    slug_to_book = {b["slug"]: b for b in books}
 
     print("Building landing page...")
-    build_landing(topics)
+    build_landing(books)
 
-    print("Building topic pages...")
-    build_topics(topics)
+    print("Building book pages...")
+    build_books(books)
 
     print("Building notebooks...")
-    build_notebooks(slug_to_topic)
+    build_notebooks(slug_to_book)
 
     print(f"\nDone! Site generated in {SITE_DIR}/")
     print(f"Serve locally with:  python -m http.server -d {SITE_DIR}")
