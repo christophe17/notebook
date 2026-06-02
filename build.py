@@ -14,7 +14,7 @@ SITE_DIR = Path("_site")
 PROJECT_DIR = Path(__file__).parent
 
 # Book summary files (order determines display order on landing page)
-BOOK_FILES = ["summaries/pml-1.md", "summaries/pml-2.md", "summaries/jax.md", "summaries/aem.md"]
+BOOK_FILES = ["summaries/pml-1.md", "summaries/pml-2.md", "summaries/jax.md", "summaries/aem.md", "summaries/probabilistic.md"]
 
 # Notebook folders to skip during build (folder names under notebooks/)
 SKIP_FOLDERS = {"jax"}
