@@ -15,6 +15,7 @@ Interactive notebooks covering the main probability distributions — their para
 | **1.3 - Poisson** | [Poisson](../notebooks/probabilistic/1-discrete/1-3-1-poisson.ipynb) | mRNA transcript counts per cell in steady state | $p(k) = \frac{\lambda^k e^{-\lambda}}{k!}$ |
 | **1.4 - Geometric & Negative Binomial** | [Geometric](../notebooks/probabilistic/1-discrete/1-4-1-geometric.ipynb) | Trials until first successful CRISPR edit | $p(k) = (1-p)^{k-1} p$ |
 | | [Negative Binomial](../notebooks/probabilistic/1-discrete/1-4-2-negative_binomial.ipynb) | Overdispersed RNA-seq counts (Poisson + Gamma rate) | $p(k) = \binom{k+r-1}{k} (1-p)^r p^k$ |
+| **1.5 - Count Noise Models in scRNA-seq** | [Poisson & NB in scRNA-seq](../notebooks/probabilistic/1-discrete/1-5-1-scrnaseq_noise_models.ipynb) | Technical sampling + biological variability in single-cell counts | $\mathrm{Var}(Y) = \mu + \mu^2 / r$ |
 
 ---
 
